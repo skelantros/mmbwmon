@@ -218,7 +218,7 @@ static void print_distgen_results(distgend_initT distgen_init) {
 
 		std::cout << "Result: " << mem << std::endl;
 
-		fast::msg::agent::mmbwmon::reply reply(req.cores, mem);
+		fast::msg::agent::mmbwmon::reply reply(req.cores, mem, req.id);
 		std::cout << "Sending message:\n" << reply.to_string() << "\n";
 		comm.send_message(reply.to_string(), baseTopic + "/response");
 	}
@@ -374,6 +374,13 @@ int main(int argc, char const *argv[]) {
 	write_yaml_file(distgen_init);
 
 	if (measure_only) return 0;
+
+	std::cout << "agentId = " << agentID << std::endl;
+	std::cout << "subscribeTopic = " << baseTopic + "/request" << std::endl;
+	std::cout << "publishTopic = " << baseTopic + "/response" << std::endl;
+	std::cout << "server = " << server << std::endl;
+	std::cout << "port = " << port << std::endl;
+	std::cout << "keepAlive = " << 60 << std::endl;
 
 	fast::MQTT_communicator comm(agentID, baseTopic + "/request", baseTopic + "/response", server,
 								 static_cast<int>(port), 60);

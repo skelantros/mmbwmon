@@ -31,13 +31,14 @@ namespace mmbwmon {
 struct reply : public fast::Serializable
 {
 	reply() = default;
-	reply(const std::vector<std::size_t> &_cores, double _result);
+	reply(const std::vector<std::size_t> &_cores, double _result, std::string &_id);
 
 	YAML::Node emit() const override;
 	void load(const YAML::Node &node) override;
 
 	std::vector<size_t> cores;
     double result;
+	std::string id;
 };
 
 }

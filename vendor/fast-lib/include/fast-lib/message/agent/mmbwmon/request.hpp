@@ -30,12 +30,13 @@ namespace mmbwmon {
 struct request : public fast::Serializable
 {
 	request() = default;
-	request(const std::vector<std::size_t> &_cores);
+	request(const std::vector<std::size_t> &_cores, std::string &_id);
 
 	YAML::Node emit() const override;
 	void load(const YAML::Node &node) override;
 
 	std::vector<size_t> cores;
+	std::string id;
 };
 
 }

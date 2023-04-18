@@ -67,7 +67,9 @@ int main(int argc, char const *argv[]) {
 
 	std::cout << "MQTT ready!\n\n";
 
-	fast::msg::agent::mmbwmon::request r(cores);
+	std::string emptyId = "";
+	std::string& emptyIdLink = emptyId;
+	fast::msg::agent::mmbwmon::request r(cores, emptyIdLink);
 	std::cout << "Going to send message:\n" << r.to_string() << "\n";
 	comm.send_message(r.to_string());
 
